@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 import requests
+import currency_stats
 
 #API request for conversion rates
 def get_conversion_rate(taregt_currency):
