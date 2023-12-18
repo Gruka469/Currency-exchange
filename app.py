@@ -4,7 +4,7 @@ import tkinter as tk
 import requests
 
 #API request for conversion rates
-def get_conversion_rate(base_currency, taregt_currency):
+def get_conversion_rate(taregt_currency):
     api_key = 'a73871bc447e4d4aadcbfe76e8857d08'
     url = 'https://openexchangerates.org/api/latest.json?app_id=a73871bc447e4d4aadcbfe76e8857d08' #By default currency = USD
 
