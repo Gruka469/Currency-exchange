@@ -2,10 +2,10 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 import requests
-import currency_stats
+from currency_stats import get_currencies
 
 #API request for conversion rates
-def get_conversion_rate(taregt_currency):
+def get_conversion_rate(target_currency):
     api_key = 'a73871bc447e4d4aadcbfe76e8857d08'
     url = 'https://openexchangerates.org/api/latest.json?app_id=a73871bc447e4d4aadcbfe76e8857d08' #By default currency = USD
 
@@ -13,7 +13,7 @@ def get_conversion_rate(taregt_currency):
     try:
         response = requests.get(url)
         data = response.json()
-        rate = data['rates'][taregt_currency]
+        rate = data['rates'][target_currency]
         return rate
     except Exception as e:
         print(f"Error fetching data from API: {e}")
@@ -22,25 +22,31 @@ def get_conversion_rate(taregt_currency):
 
 
 def input_currency():
-    # Destroy the current window
-    window.destroy()
+    # Destroy the current root
+    root.destroy()
 
-    # Create a new window for currency submission
-    submit_window = tk.Tk()
-    submit_window.title("Submit Currency")
-    submit_window.geometry('400x200')
-
-    first_currency_label = tk.Label(submit_window, text="Enter First Currency:")
-    first_currency_entry = tk.Entry(submit_window)
-    second_currency_label = tk.Label(submit_window, text="Enter Second Currency:")
-    second_currency_entry = tk.Entry(submit_window)
-    submit_button = tk.Button(submit_window, text="Submit", command=lambda: submit(first_currency_entry.get(), second_currency_entry.get())) #passing both of the arguments with "get" method
-
+    # Create a new root for currency submission
+    submit_root = tk.Tk()
+    submit_root.title("Submit Currency")
+    submit_root.geometry('400x200')
+    # boxes for currency input
+    first_currency_label = tk.Label(submit_root, text="Enter First Currency:")
+    first_currency_entry = tk.Entry(submit_root)
+    second_currency_label = tk.Label(submit_root, text="Enter Second Currency:")
+    second_currency_entry = tk.Entry(submit_root)
+    submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), second_currency_entry.get())) #passing both of the arguments with "get" method
+    #dropdown menu
+    selected_option = tk.StringVar(submit_root)
+    dropdown = tk.OptionMenu(submit_root, selected_option, *get_currencies())
+    dropdown1 = tk.OptionMenu(submit_root, selected_option, *get_currencies())
+    #grid system
     first_currency_label.grid(row=0, column=0, padx=10, pady=10) #positioning accordingly
     first_currency_entry.grid(row=0, column=1, padx=10, pady=10) #positioning accordingly
     second_currency_label.grid(row=1, column=0, padx=10, pady=10) #positioning accordingly
     second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
     submit_button.grid(row=2, column=0, columnspan=2, pady=10) #positioning accordingly
+    dropdown.grid(row=0, column=3, padx=10, pady=10)
+    dropdown1.grid(row=1, column=3, padx=10, pady=10)
 
 def submit(first_currency, second_currency):
     # Print or use the entered currencies as needed
@@ -52,14 +58,23 @@ def submit(first_currency, second_currency):
     if conversion_rate is not None:
         print(f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
 
-# Create the main window
-window = tk.Tk()
-window.title("Currency Application")
-window.geometry('400x200')
+def dropdown_menu(root):
+    options = get_currencies()
+
+    selected_option = tk.StringVar(root)
+    selected_option.set(options[0]) #default selected option
+    dropdown_menu = tk.OptionMenu(root, selected_option, *options)
+    dropdown_menu.grid(row=0, column=3, padx=10, pady=10)
+
+
+# Create the main root
+root = tk.Tk()
+root.title("Currency Application")
+root.geometry('400x200')
 
 # Create a button to initiate the currency input
-button = tk.Button(window, text="Click me", command=input_currency)
+button = tk.Button(root, text="Click me", command=input_currency)
 button.grid(row=0, column=0, pady=10)
 
 # Start the Tkinter event loop
-window.mainloop()
+root.mainloop()
