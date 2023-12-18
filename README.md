@@ -4,6 +4,11 @@ A tkinter python app for currency exchange
 
 Requests
 
+from tkinter import *
+from tkinter import ttk
+import tkinter as tk
+import requests
+
 def get_conversion_rate(taregt_currency):
     api_key = 'a73871bc447e4d4aadcbfe76e8857d08'
     url = 'https://openexchangerates.org/api/latest.json?app_id=a73871bc447e4d4aadcbfe76e8857d08' #By default currency = USD
