@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 import requests
-from currency_stats import get_currencies
+from get_currencies import get_currencies
 
 #API request for conversion rates
 def get_conversion_rate(base_currency, target_currency):
@@ -28,13 +28,16 @@ def input_currency():
     # Create a new root for currency submission
     submit_root = tk.Tk()
     submit_root.title("Submit Currency")
-    submit_root.geometry('400x200')
+    submit_root.geometry('400x400')
     # boxes for currency input
     first_currency_label = tk.Label(submit_root, text="Enter First Currency:")
     first_currency_entry = tk.Entry(submit_root)
     second_currency_label = tk.Label(submit_root, text="Enter Second Currency:")
     second_currency_entry = tk.Entry(submit_root)
-    submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), second_currency_entry.get(), selected_option, selected_option1)) #passing both of the arguments with "get" method
+    submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), \
+                                                                                 second_currency_entry.get(), \
+                                                                                    selected_option, \
+                                                                                        selected_option1, submit_root)) #passing all of the arguments needed
     #dropdown menu
     selected_option = tk.StringVar(submit_root)
     selected_option1 = tk.StringVar(submit_root)
@@ -50,28 +53,30 @@ def input_currency():
     combobox.grid(row=0, column=3, padx=10, pady=10)
     combobox1.grid(row=1, column=3, padx=10, pady=10)
 
-def submit(first_currency, second_currency, selected_option, selected_option1):
+def submit(first_currency, second_currency, selected_option, selected_option1, submit_root):
     # If the entry fields are empty, use the dropdown values
     if not first_currency:
         first_currency = selected_option.get()
     if not second_currency:
         second_currency = selected_option1.get()
-    # Print or use the entered currencies as needed
-    print("First Currency:", first_currency) #printing the currency inputed from the .entry
-    print("Second Currency:", second_currency) #printing the currency inputed from the .entry
+    # Print entered currencies inside the GUI
+    label1 = Label(submit_root, text=f"First Currency: {first_currency}")
+    label1.grid(row=3, column=0, padx=10, pady=10)
+    label2 = Label(submit_root, text=f"Second Currency: {second_currency}")
+    label2.grid(row=4, column=0, padx=10, pady=10)
 
     conversion_rate = get_conversion_rate(first_currency, second_currency)
 
     if conversion_rate is not None:
-        print(f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
+        label3 = Label(submit_root, text=f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
+        label3.grid(row=5, column=0, padx=10, pady=10)
         
-#FUNCTION TO RETURN THE CURRENCY RATE IN THE APP!!!!
 
 
 # Create the main root
 root = tk.Tk()
 root.title("Currency Application")
-root.geometry('400x200')
+root.geometry('400x400')
 
 # Create a button to initiate the currency input
 button = tk.Button(root, text="Click me", command=input_currency)
