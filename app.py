@@ -38,8 +38,8 @@ def input_currency():
     #dropdown menu
     selected_option = tk.StringVar(submit_root)
     selected_option1 = tk.StringVar(submit_root)
-    dropdown = tk.OptionMenu(submit_root, selected_option, *get_currencies())
-    dropdown1 = tk.OptionMenu(submit_root, selected_option1, *get_currencies())
+    combobox = ttk.Combobox(submit_root, textvariable=selected_option, values=get_currencies(), state="readonly", height=5)
+    combobox1 = ttk.Combobox(submit_root, textvariable=selected_option1, values=get_currencies(), state="readonly", height=5)
     
     #grid system
     first_currency_label.grid(row=0, column=0, padx=10, pady=10) #positioning accordingly
@@ -47,8 +47,8 @@ def input_currency():
     second_currency_label.grid(row=1, column=0, padx=10, pady=10) #positioning accordingly
     second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
     submit_button.grid(row=2, column=0, columnspan=2, pady=10) #positioning accordingly
-    dropdown.grid(row=0, column=3, padx=10, pady=10)
-    dropdown1.grid(row=1, column=3, padx=10, pady=10)
+    combobox.grid(row=0, column=3, padx=10, pady=10)
+    combobox1.grid(row=1, column=3, padx=10, pady=10)
 
 def submit(first_currency, second_currency, selected_option, selected_option1):
     # If the entry fields are empty, use the dropdown values
