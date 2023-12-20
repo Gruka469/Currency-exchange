@@ -31,14 +31,15 @@ def input_currency():
     submit_root.geometry('400x400')
     # boxes for currency input
     first_currency_label = tk.Label(submit_root, text="Enter First Currency:")
-    first_currency_entry = tk.Entry(submit_root)
+    first_currency_entry = tk.Entry(submit_root) #That's the input box
     second_currency_label = tk.Label(submit_root, text="Enter Second Currency:")
-    second_currency_entry = tk.Entry(submit_root)
+    second_currency_entry = tk.Entry(submit_root) #That's the input box
     submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), \
-                                                                                 second_currency_entry.get(), \
-                                                                                    selected_option, \
-                                                                                        selected_option1, submit_root)) #passing all of the arguments needed
+                                                                                second_currency_entry.get(), \
+                                                                                selected_option, \
+                                                                                selected_option1, submit_root)) #passing all of the arguments needed
     #dropdown menu
+    #Using combobox because it's more flexible
     selected_option = tk.StringVar(submit_root)
     selected_option1 = tk.StringVar(submit_root)
     combobox = ttk.Combobox(submit_root, textvariable=selected_option, values=get_currencies(), state="readonly", height=5)
@@ -50,8 +51,8 @@ def input_currency():
     second_currency_label.grid(row=1, column=0, padx=10, pady=10) #positioning accordingly
     second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
     submit_button.grid(row=2, column=0, columnspan=2, pady=10) #positioning accordingly
-    combobox.grid(row=0, column=3, padx=10, pady=10)
-    combobox1.grid(row=1, column=3, padx=10, pady=10)
+    combobox.grid(row=0, column=3, padx=10, pady=10) #positioning accordingly
+    combobox1.grid(row=1, column=3, padx=10, pady=10) #positioning accordingly
 
 def submit(first_currency, second_currency, selected_option, selected_option1, submit_root):
     # If the entry fields are empty, use the dropdown values
@@ -65,8 +66,9 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
     label2 = Label(submit_root, text=f"Second Currency: {second_currency}")
     label2.grid(row=4, column=0, padx=10, pady=10)
 
-    conversion_rate = get_conversion_rate(first_currency, second_currency)
+    conversion_rate = get_conversion_rate(first_currency, second_currency) #The whole conversion rate
 
+    #Checks if the function is True and then returns some text
     if conversion_rate is not None:
         label3 = Label(submit_root, text=f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
         label3.grid(row=5, column=0, padx=10, pady=10)

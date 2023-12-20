@@ -20,7 +20,7 @@ def get_currencies():
     if response.status_code == 200:
         data = response.json()
         # Access the currency data from the response
-        currencies = list(data.keys())
+        currencies = list(data.keys()) #changing the format from dict to list because "combobox" cannot read dicts
         return currencies
     else:
         print('Failed to retrieve data. Status code:', response.status_code)    
