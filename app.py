@@ -73,6 +73,7 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
         label3 = Label(submit_root, text=f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
         label3.grid(row=5, column=0, padx=10, pady=10)
         
+#CREATE A FUNCTION TO TAKE ANY KIND OF SUM OF MONEY AND EXCHANGE THE CURRENCY        
 
 
 # Create the main root
