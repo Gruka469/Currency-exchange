@@ -5,6 +5,7 @@ import requests
 from get_currencies import get_currencies
 
 #API request for conversion rates
+#The API supports conversions only from a base or source currency make it work like that !!!
 def get_conversion_rate(base_currency, target_currency):
     api_key = 'a73871bc447e4d4aadcbfe76e8857d08'
     url = 'https://openexchangerates.org/api/latest.json?app_id=a73871bc447e4d4aadcbfe76e8857d08' #By default currency = USD
