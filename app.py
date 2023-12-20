@@ -64,14 +64,8 @@ def submit(first_currency, second_currency, selected_option, selected_option1):
 
     if conversion_rate is not None:
         print(f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
-
-# def dropdown_menu(root):
-#     options = get_currencies()
-
-#     selected_option = tk.StringVar(root)
-#     selected_option.set(options[0]) #default selected option
-#     dropdown_menu = tk.OptionMenu(root, selected_option, *options)
-#     dropdown_menu.grid(row=0, column=3, padx=10, pady=10)
+        
+#FUNCTION TO RETURN THE CURRENCY RATE IN THE APP!!!!
 
 
 # Create the main root
