@@ -20,7 +20,8 @@ def get_currencies():
     if response.status_code == 200:
         data = response.json()
         # Access the currency data from the response
-        return data
+        currencies = list(data.keys())[:10]
+        return currencies
     else:
         print('Failed to retrieve data. Status code:', response.status_code)    
         return None
