@@ -56,6 +56,7 @@ def input_currency():
     combobox1.grid(row=1, column=3, padx=10, pady=10) #positioning accordingly
 
 def submit(first_currency, second_currency, selected_option, selected_option1, submit_root):
+    global conversion_rate #Assigning the conversion rate variable to a global keyword in order to use it in other functions
     # If the entry fields are empty, use the dropdown values
     if not first_currency:
         first_currency = selected_option.get()
@@ -75,7 +76,8 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
         label3.grid(row=5, column=0, padx=10, pady=10)
         
 #CREATE A FUNCTION TO TAKE ANY KIND OF SUM OF MONEY AND EXCHANGE THE CURRENCY        
-
+def conversion_calc(conversion_rate, number_to_convert):
+    currency_calculation = conversion_rate * number_to_convert
 
 # Create the main root
 root = tk.Tk()
