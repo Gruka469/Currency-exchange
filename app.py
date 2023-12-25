@@ -39,14 +39,12 @@ def input_currency():
     submit_root.geometry('600x400')
     # boxes for currency input
     first_currency_label = tk.Label(submit_root, text="Enter First Currency:")
-    first_currency_entry = tk.Entry(submit_root) #That's the input box
+    # first_currency_entry = tk.Entry(submit_root) #That's the input box
     second_currency_label = tk.Label(submit_root, text="Enter Second Currency:")
-    second_currency_entry = tk.Entry(submit_root) #That's the input box
+    # second_currency_entry = tk.Entry(submit_root) #That's the input box
     amount_label = tk.Label(submit_root, text="Enter Amount:")
     amount_entry = tk.Entry(submit_root) #That's the input box for the amount
-    submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), \
-                                                                                second_currency_entry.get(), \
-                                                                                selected_option, \
+    submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(selected_option, \
                                                                                 selected_option1, submit_root)) #passing all of the arguments needed
     convert_button = tk.Button(submit_root, text="Convert", command=lambda: conversion_calc(selected_option, \
                                                                                             selected_option1, \
@@ -60,9 +58,9 @@ def input_currency():
     
     #grid system
     first_currency_label.grid(row=0, column=0, padx=10, pady=10) #positioning accordingly
-    first_currency_entry.grid(row=0, column=1, padx=10, pady=10) #positioning accordingly
+    # first_currency_entry.grid(row=0, column=1, padx=10, pady=10) #positioning accordingly
     second_currency_label.grid(row=1, column=0, padx=10, pady=10) #positioning accordingly
-    second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
+    # second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
     amount_label.grid(row=2, column=0, padx=10, pady=10) #positioning accordingly
     amount_entry.grid(row=2, column=1, padx=10, pady=10) #positioning accordingly
     submit_button.grid(row=3, column=0, columnspan=2, pady=10) #positioning accordingly
@@ -70,12 +68,14 @@ def input_currency():
     combobox.grid(row=0, column=3, padx=10, pady=10) #positioning accordingly
     combobox1.grid(row=1, column=3, padx=10, pady=10) #positioning accordingly
 
-def submit(first_currency, second_currency, selected_option, selected_option1, submit_root):
+def submit(selected_option, selected_option1, submit_root):
     # If the entry fields are empty, use the dropdown values
-    if not first_currency:
-        first_currency = selected_option.get()
-    if not second_currency:
-        second_currency = selected_option1.get()
+    # if not first_currency:
+    #     first_currency = selected_option.get()
+    # if not second_currency:
+    #     second_currency = selected_option1.get()
+    first_currency = selected_option.get()
+    second_currency = selected_option1.get()
     # Print entered currencies inside the GUI
     label1 = Label(submit_root, text=f"First Currency: {first_currency}")
     label1.grid(row=4, column=0, padx=10, pady=10)
