@@ -83,8 +83,7 @@ def conversion_calc(conversion_rate, number_to_convert, base_currency, target_cu
     conversion_rate = get_conversion_rate(base_currency, target_currency)
     if conversion_rate is not None:
         currency_calculation = conversion_rate * number_to_convert
-        return tk.Label(root, text=f"Converted amount: {currency_calculation}")
-    amount_entry = tk.Entry(root)
+        label1 = tk.Label(root, text=f"Converted amount: {currency_calculation}")
 
 
 # Create the main root
