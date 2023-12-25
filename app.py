@@ -3,6 +3,7 @@ from tkinter import ttk
 import tkinter as tk
 import requests
 from get_currencies import get_currencies
+import traceback
 
 #API request for conversion rates
 #The API supports conversions only from a base or source currency make it work like that !!!
@@ -14,10 +15,16 @@ def get_conversion_rate(base_currency, target_currency):
     try:
         response = requests.get(url)
         data = response.json()
-        rate = data['rates'][target_currency]
-        return rate
+        if target_currency and target_currency in data['rates']:
+            rate = data['rates'][target_currency]
+            return rate
+        else:
+            print(f"Error: Invalid or empty target_currency: {target_currency}")
+            return None
+
     except Exception as e:
         print(f"Error fetching data from API: {e}")
+        traceback.print_exc()
         return None
 
 
@@ -94,6 +101,7 @@ def conversion_calc(selected_option, selected_option1, number_entry, root):
         conversion_rate = get_conversion_rate(base_currency, target_currency)
     except Exception as e:
         print(f"Error fetching data from API: {e}")
+        traceback.print_exc()
         return None
     if conversion_rate is not None:
         currency_calculation = conversion_rate * number_to_convert
