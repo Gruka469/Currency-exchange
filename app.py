@@ -85,8 +85,7 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
 #CREATE A FUNCTION TO TAKE ANY KIND OF SUM OF MONEY AND EXCHANGE THE CURRENCY        
 def conversion_calc(selected_option, selected_option1, number_entry, root):
     """
-    Still need to make it so the user is prompted to enter an amount which then be converted to the given currency
-    right now it is just a simple calculation which later is going to be used for that sole purpose
+    Error fetching data from API: ''
     """
     base_currency = selected_option.get()
     target_currency = selected_option1.get()
