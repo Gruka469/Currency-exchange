@@ -36,7 +36,7 @@ def input_currency():
     # Create a new root for currency submission
     submit_root = tk.Tk()
     submit_root.title("Submit Currency")
-    submit_root.geometry('400x400')
+    submit_root.geometry('600x400')
     # boxes for currency input
     first_currency_label = tk.Label(submit_root, text="Enter First Currency:")
     first_currency_entry = tk.Entry(submit_root) #That's the input box
@@ -78,16 +78,16 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
         second_currency = selected_option1.get()
     # Print entered currencies inside the GUI
     label1 = Label(submit_root, text=f"First Currency: {first_currency}")
-    label1.grid(row=3, column=0, padx=10, pady=10)
+    label1.grid(row=4, column=0, padx=10, pady=10)
     label2 = Label(submit_root, text=f"Second Currency: {second_currency}")
-    label2.grid(row=4, column=0, padx=10, pady=10)
+    label2.grid(row=5, column=0, padx=10, pady=10)
 
     conversion_rate = get_conversion_rate(first_currency, second_currency) #The whole conversion rate
 
     #Checks if the function is True and then returns some text
     if conversion_rate is not None:
         label3 = Label(submit_root, text=f"Conversion rate from {first_currency} to {second_currency}: {conversion_rate}")
-        label3.grid(row=5, column=0, padx=10, pady=10)
+        label3.grid(row=6, column=0, padx=10, pady=10)
         
 #CREATE A FUNCTION TO TAKE ANY KIND OF SUM OF MONEY AND EXCHANGE THE CURRENCY        
 def conversion_calc(selected_option, selected_option1, number_entry, root):
@@ -97,12 +97,14 @@ def conversion_calc(selected_option, selected_option1, number_entry, root):
     base_currency = selected_option.get()
     target_currency = selected_option1.get()
     number_to_convert = float(number_entry.get())  # convert the entry to a float
+
     try:
         conversion_rate = get_conversion_rate(base_currency, target_currency)
     except Exception as e:
         print(f"Error fetching data from API: {e}")
         traceback.print_exc()
         return None
+    
     if conversion_rate is not None:
         currency_calculation = conversion_rate * number_to_convert
         label1 = tk.Label(root, text=f"Converted amount: {currency_calculation}")
@@ -112,7 +114,7 @@ def conversion_calc(selected_option, selected_option1, number_entry, root):
 # Create the main root
 root = tk.Tk()
 root.title("Currency Application")
-root.geometry('400x400')
+root.geometry('600x400')
 
 # Create a button to initiate the currency input
 button = tk.Button(root, text="Click me", command=input_currency)
