@@ -107,7 +107,7 @@ def conversion_calc(selected_option, selected_option1, number_entry, root):
     
     if conversion_rate is not None:
         currency_calculation = conversion_rate * number_to_convert
-        label1 = tk.Label(root, text=f"Converted amount: {currency_calculation}")
+        label1 = tk.Label(root, text=f"Converted amount: {currency_calculation:.2f}")
         label1.grid(row=6, column=0, padx=10, pady=10)
 
 
