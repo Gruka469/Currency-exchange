@@ -35,10 +35,15 @@ def input_currency():
     first_currency_entry = tk.Entry(submit_root) #That's the input box
     second_currency_label = tk.Label(submit_root, text="Enter Second Currency:")
     second_currency_entry = tk.Entry(submit_root) #That's the input box
+    amount_label = tk.Label(submit_root, text="Enter Amount:")
+    amount_entry = tk.Entry(submit_root) #That's the input box for the amount
     submit_button = tk.Button(submit_root, text="Submit", command=lambda: submit(first_currency_entry.get(), \
                                                                                 second_currency_entry.get(), \
                                                                                 selected_option, \
                                                                                 selected_option1, submit_root)) #passing all of the arguments needed
+    convert_button = tk.Button(submit_root, text="Convert", command=lambda: conversion_calc(selected_option, \
+                                                                                            selected_option1, \
+                                                                                            amount_entry, submit_root)) #passing all of the arguments needed
     #dropdown menu
     #Using combobox because it's more flexible
     selected_option = tk.StringVar(submit_root)
@@ -51,7 +56,10 @@ def input_currency():
     first_currency_entry.grid(row=0, column=1, padx=10, pady=10) #positioning accordingly
     second_currency_label.grid(row=1, column=0, padx=10, pady=10) #positioning accordingly
     second_currency_entry.grid(row=1, column=1, padx=10, pady=10) #positioning accordingly
-    submit_button.grid(row=2, column=0, columnspan=2, pady=10) #positioning accordingly
+    amount_label.grid(row=2, column=0, padx=10, pady=10) #positioning accordingly
+    amount_entry.grid(row=2, column=1, padx=10, pady=10) #positioning accordingly
+    submit_button.grid(row=3, column=0, columnspan=2, pady=10) #positioning accordingly
+    convert_button.grid(row=3, column=1, columnspan=2, pady=10) #positioning accordingly
     combobox.grid(row=0, column=3, padx=10, pady=10) #positioning accordingly
     combobox1.grid(row=1, column=3, padx=10, pady=10) #positioning accordingly
 
@@ -75,15 +83,23 @@ def submit(first_currency, second_currency, selected_option, selected_option1, s
         label3.grid(row=5, column=0, padx=10, pady=10)
         
 #CREATE A FUNCTION TO TAKE ANY KIND OF SUM OF MONEY AND EXCHANGE THE CURRENCY        
-def conversion_calc(conversion_rate, number_to_convert, base_currency, target_currency):
+def conversion_calc(selected_option, selected_option1, number_entry, root):
     """
     Still need to make it so the user is prompted to enter an amount which then be converted to the given currency
     right now it is just a simple calculation which later is going to be used for that sole purpose
     """
-    conversion_rate = get_conversion_rate(base_currency, target_currency)
+    base_currency = selected_option.get()
+    target_currency = selected_option1.get()
+    number_to_convert = float(number_entry.get())  # convert the entry to a float
+    try:
+        conversion_rate = get_conversion_rate(base_currency, target_currency)
+    except Exception as e:
+        print(f"Error fetching data from API: {e}")
+        return None
     if conversion_rate is not None:
         currency_calculation = conversion_rate * number_to_convert
         label1 = tk.Label(root, text=f"Converted amount: {currency_calculation}")
+        label1.grid(row=6, column=0, padx=10, pady=10)
 
 
 # Create the main root
